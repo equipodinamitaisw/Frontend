@@ -109,10 +109,11 @@ import AgenciesService from '../services/agencies.service'
 
 export default {
   name: "AgencyDescription",
+  props: ["agid"],
   data: () => ({
     errors: [],
     agency: [],
-    id: 1,
+    id: '',
     editInformation: false,
     newInformation: {
       name: "",
@@ -191,7 +192,14 @@ export default {
     }
   },
   mounted() {
-    this.retrieveAgency()
+    this.retrieveAgency();
+    this.id = this.$store.state.auth.user.id;
+
+
+
+  },
+  beforeMount() {
+    this.id = this.$store.state.auth.user.id;
   }
 }
 </script>

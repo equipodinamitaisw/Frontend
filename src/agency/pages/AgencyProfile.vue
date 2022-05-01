@@ -135,6 +135,7 @@ import AddService from '../pages/AddServices';
 import ListReviews from '../../common/pages/ListReviews';
 export default {
   name: "CustomerProfile",
+
   components: { AgencyDescription, ListReviews, AddService },
   data: () => ({
     errors: [],
