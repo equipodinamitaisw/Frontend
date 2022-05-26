@@ -1,7 +1,7 @@
 import http from '../../core/http-common'
 
 class SubscriptionService{
-    endPoint = 'https://localhost:5001/api/v1/subscriptions';
+    endPoint = 'https://go2climbisw.azurewebsites.net/api/v1/subscriptions';
 
     getAll(){
         return http.get(this.endPoint);

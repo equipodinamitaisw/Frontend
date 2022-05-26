@@ -1,7 +1,7 @@
 import http from '../../core/http-common'
 
 class AgencyReviewService {
-    endPoint = 'https://localhost:5001/api/v1/agencyreviews';
+    endPoint = 'https://go2climbisw.azurewebsites.net/api/v1/agencyreviews';
 
     create(agencyReviewDto) {
         return http.post(this.endPoint, agencyReviewDto);

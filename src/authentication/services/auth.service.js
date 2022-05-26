@@ -2,9 +2,9 @@
 import axios from 'axios';
 
 //ENDPOINT
-const API_URL = 'https://localhost:5001/api/v1/users/auth/sign-in';
-const API_SIGN_UP_CUSTOMER = 'https://localhost:5001/api/v1/customers/auth/sign-up/';
-const API_SIGN_UP_AGENCY = 'https://localhost:5001/api/v1/agencies/auth/sign-up/';
+const API_URL = 'https://go2climbisw.azurewebsites.net/api/v1/users/auth/sign-in';
+const API_SIGN_UP_CUSTOMER = 'https://go2climbisw.azurewebsites.net/api/v1/customers/auth/sign-up/';
+const API_SIGN_UP_AGENCY = 'https://go2climbisw.azurewebsites.net/api/v1/agencies/auth/sign-up/';
 class AuthService {
     //EJECUTA EL PROCESO DE LOGIN DADO UN USUARIO INGRESADO
     login(user) {
