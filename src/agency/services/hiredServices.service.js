@@ -7,7 +7,7 @@ class HiredService {
         return http.get(this.endPoint);
     }
     getExtendInformation(agencyId, category) {
-        return http.get(`https://go2climbisw.azurewebsites.net/${agencyId}/hiredservices?expand=${category}`);
+        return http.get(`https://go2climbisw.azurewebsites.net/api/v1/hiredservice?expand=${category}/${agencyId}`);
     }
     getById(id) {
         return http.get(`${this.endPoint}/${id}`);
