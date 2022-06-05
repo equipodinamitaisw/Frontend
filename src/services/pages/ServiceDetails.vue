@@ -71,8 +71,16 @@
         <!--Section 1: ServiceInformation -->
         <v-col cols="12" class="col-md-9">
           <v-card class="py-4 px-8 mb-4 rounded-lg">
+            <v-alert v-if=" service.reports >= 3" type="error">This service has recived multiple reports</v-alert>
             <v-list>
+              <v-row>
+              <v-col>
               <v-subheader class="title font-weight-bold pl-0">{{service.name}} </v-subheader>
+              </v-col>
+              <v-col class="d-flex justify-end">
+                <v-btn elevation="0" outlined text color="red">Report <v-icon>mdi-alert</v-icon></v-btn>
+              </v-col>
+              </v-row>
               <v-row>
                 <v-col class="d-flex">
                   <v-icon color ="primary"> mdi-map-marker-circle </v-icon>
@@ -117,6 +125,25 @@
               </v-list-item-group>
             </v-list>
           </v-card>
+          <v-container v-if="service.videoUrl != null">
+            <v-row class="d-flex flex-md-row flex-xl-column">
+              <v-col>
+                <v-card class="py-4 px-8 mb-4 rounded-lg">
+                  <v-row>
+                    <v-subheader class="font-weight-bold title"> Video of our service</v-subheader>
+                  </v-row>
+                  <v-row class="mx-2 my-4">
+                    <v-col class="d-flex justify-center">
+                      <iframe width="480" height="320"
+                              :src="service.videoUrl"
+                       >
+                      </iframe>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
           <!-- Section 3: Service Activities -->
           <v-row>
             <v-col>
