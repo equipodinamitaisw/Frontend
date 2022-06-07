@@ -78,7 +78,7 @@
               <v-subheader class="title font-weight-bold pl-0">{{service.name}} </v-subheader>
               </v-col>
               <v-col class="d-flex justify-end">
-                <v-btn elevation="0" outlined text color="red">Report <v-icon>mdi-alert</v-icon></v-btn>
+                <v-btn elevation="0" outlined text color="red" @click="reportService">Report <v-icon>mdi-alert</v-icon></v-btn>
               </v-col>
               </v-row>
               <v-row>
@@ -195,6 +195,8 @@ import SolicitService from '../pages/SolicitService'
 import ServicesService from '../services/services.service'
 import AgenciesService from  '../services/agencies.service'
 import moment from 'moment'
+import servicesService from "@/agency/services/services.service";
+
 export default {
   name: "ServiceDetail",
   components: { ListReviews, SolicitService },
@@ -273,7 +275,31 @@ export default {
         if (this.typeUser == null || this.typeUser === '') this.$emit('sign-in');
         else if (this.typeUser === 'customer') this.setDialogSolicit();
       }
+      this.$ga.event('services', 'solicit', 'buy', this.service.id)
     },
+    async reportService(){
+      let serviceDto = {
+        id: this.service.id,
+        agencyId: this.service.agencyId,
+        name: this.service.name,
+        score: this.service.score,
+        price: this.service.price,
+        newPrice: this.service.newPrice,
+        location: this.service.location,
+        creationDate: this.service.creationDate,
+        photos: this.service.photos,
+        videoUrl: this.service.videoUrl,
+        reports: this.service.reports += 1,
+        description: this.service.description,
+        isOffer: this.service.isOffer,
+        agency: this.service.agency
+      };
+      console.log(serviceDto)
+      await servicesService.update(this.service.id, serviceDto).then(serviceDto = null).catch(error => {
+        this.errors.push(error);
+      });
+
+    }
   },
   async mounted() {
     await this.retrieveService();

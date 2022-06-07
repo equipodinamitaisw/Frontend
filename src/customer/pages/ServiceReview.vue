@@ -117,7 +117,7 @@ export default {
           comment: this.message,
           score: Number(this.score)
         };
-        console.log(saveServiceReview);
+        //console.log(saveServiceReview);
         await ServiceReviewService.create(saveServiceReview)
             .then(response => {
               if (response.status === 200) this.setDialogContinue();

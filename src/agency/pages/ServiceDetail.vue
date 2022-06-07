@@ -123,9 +123,9 @@ export default {
   },
   beforeMount() {
     //console.log("XD")
-    this.id = this.$route.params.id
-    this.retrieveServices();
-    this.Aid = this.services.AgencyId
+    //this.id = this.$route.params.id
+    //this.retrieveServices();
+    //this.Aid = this.services.AgencyId
     //console.log(this.serviceId)
   },
 }
