@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: '/agency/service/:id',
-    name: 'ServiceDetails',
+    name: 'ServiceDetail',
     component: () => import('../agency/pages/ServiceDetail'),
     props: true
   },

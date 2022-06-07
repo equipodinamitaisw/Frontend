@@ -71,8 +71,16 @@
         <!--Section 1: ServiceInformation -->
         <v-col cols="12" class="col-md-9">
           <v-card class="py-4 px-8 mb-4 rounded-lg">
+            <v-alert v-if=" service.reports >= 3" type="error">This service has recived multiple reports</v-alert>
             <v-list>
+              <v-row>
+              <v-col>
               <v-subheader class="title font-weight-bold pl-0">{{service.name}} </v-subheader>
+              </v-col>
+              <v-col class="d-flex justify-end">
+                <v-btn elevation="0" outlined text color="red" @click="reportService">Report <v-icon>mdi-alert</v-icon></v-btn>
+              </v-col>
+              </v-row>
               <v-row>
                 <v-col class="d-flex">
                   <v-icon color ="primary"> mdi-map-marker-circle </v-icon>
@@ -117,6 +125,25 @@
               </v-list-item-group>
             </v-list>
           </v-card>
+          <v-container v-if="service.videoUrl != null">
+            <v-row class="d-flex flex-md-row flex-xl-column">
+              <v-col>
+                <v-card class="py-4 px-8 mb-4 rounded-lg">
+                  <v-row>
+                    <v-subheader class="font-weight-bold title"> Video of our service</v-subheader>
+                  </v-row>
+                  <v-row class="mx-2 my-4">
+                    <v-col class="d-flex justify-center">
+                      <iframe width="480" height="320"
+                              :src="service.videoUrl"
+                       >
+                      </iframe>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
           <!-- Section 3: Service Activities -->
           <v-row>
             <v-col>
@@ -168,6 +195,8 @@ import SolicitService from '../pages/SolicitService'
 import ServicesService from '../services/services.service'
 import AgenciesService from  '../services/agencies.service'
 import moment from 'moment'
+import servicesService from "@/agency/services/services.service";
+
 export default {
   name: "ServiceDetail",
   components: { ListReviews, SolicitService },
@@ -246,7 +275,31 @@ export default {
         if (this.typeUser == null || this.typeUser === '') this.$emit('sign-in');
         else if (this.typeUser === 'customer') this.setDialogSolicit();
       }
+      this.$ga.event('services', 'solicit', 'buy', this.service.id)
     },
+    async reportService(){
+      let serviceDto = {
+        id: this.service.id,
+        agencyId: this.service.agencyId,
+        name: this.service.name,
+        score: this.service.score,
+        price: this.service.price,
+        newPrice: this.service.newPrice,
+        location: this.service.location,
+        creationDate: this.service.creationDate,
+        photos: this.service.photos,
+        videoUrl: this.service.videoUrl,
+        reports: this.service.reports += 1,
+        description: this.service.description,
+        isOffer: this.service.isOffer,
+        agency: this.service.agency
+      };
+      console.log(serviceDto)
+      await servicesService.update(this.service.id, serviceDto).then(serviceDto = null).catch(error => {
+        this.errors.push(error);
+      });
+
+    }
   },
   async mounted() {
     await this.retrieveService();
