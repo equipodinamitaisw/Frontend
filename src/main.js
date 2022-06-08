@@ -4,14 +4,14 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import moment from 'moment'
 import store from './store';
-import VueAnalytics from 'vue-analytics'
+import VueGtag from "vue-gtag";
 
 Vue.config.productionTip = false
 
-Vue.use(VueAnalytics, {
-  id: 'G-WR1KC1L6PJ',
-  router
-});
+Vue.use(VueGtag, {
+  config:{id: 'G-WR1KC1L6PJ'},
+  appName: 'go2climb'
+}, router);
 
 new Vue({
   router,
