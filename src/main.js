@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 Vue.use(VueGtag, {
   config:{id: 'G-WR1KC1L6PJ'},
   appName: 'go2climb'
-});
+}, router);
 
 new Vue({
   router,
