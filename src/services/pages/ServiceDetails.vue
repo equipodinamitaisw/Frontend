@@ -53,7 +53,7 @@
                       color="blue"></v-text-field>
                 </v-form>
                 <v-row>
-                  <v-col><v-btn @click="continueDialogSolicit" class="rounded-pill mt-7 mb-2 col-12" color="primary">Solicit</v-btn></v-col>
+                  <v-col><v-btn v-if="typeUser!=null" @click="continueDialogSolicit" class="rounded-pill mt-7 mb-2 col-12" color="primary">Solicit</v-btn></v-col>
                 </v-row>
                 <solicit-service
                     v-on:dialog-solicit-false="setDialogSolicit"
