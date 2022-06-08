@@ -275,7 +275,7 @@ export default {
         if (this.typeUser == null || this.typeUser === '') this.$emit('sign-in');
         else if (this.typeUser === 'customer') this.setDialogSolicit();
       }
-      this.$ga.event('services', 'solicit', 'buy', this.service.id)
+      this.$gtag.event('solicit', {method: 'google'})
     },
     async reportService(){
       let serviceDto = {
@@ -294,7 +294,7 @@ export default {
         isOffer: this.service.isOffer,
         agency: this.service.agency
       };
-      console.log(serviceDto)
+      //console.log(serviceDto)
       await servicesService.update(this.service.id, serviceDto).then(serviceDto = null).catch(error => {
         this.errors.push(error);
       });
