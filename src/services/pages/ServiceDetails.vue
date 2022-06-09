@@ -275,7 +275,7 @@ export default {
         if (this.typeUser == null || this.typeUser === '') this.$emit('sign-in');
         else if (this.typeUser === 'customer') this.setDialogSolicit();
       }
-      this.$gtag.event('solicit', {method: 'google'})
+      this.$gtag.event('solicit', {'serviceName': this.service.name,'serviceId': this.service.id})
     },
     async reportService(){
       let serviceDto = {
